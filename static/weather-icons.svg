@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="sun" viewBox="0 0 64 64">
+    <circle cx="32" cy="32" r="11"/><path d="M32 5v8m0 38v8M5 32h8m38 0h8M12.9 12.9l5.7 5.7m26.8 26.8 5.7 5.7m0-38.2-5.7 5.7M18.6 45.4l-5.7 5.7"/>
+  </symbol>
+  <symbol id="moon" viewBox="0 0 64 64">
+    <path d="M47.8 40.3A22 22 0 0 1 23.7 16.2 22 22 0 1 0 47.8 40.3Z"/><path d="m44 11 1.5 4.5L50 17l-4.5 1.5L44 23l-1.5-4.5L38 17l4.5-1.5L44 11Z"/>
+  </symbol>
+  <symbol id="partly-cloudy" viewBox="0 0 64 64">
+    <path d="M39 13V7m14 12 4-4m-4 18h6M25 18l-4-4m-2 13h-6m27-4a11 11 0 0 0-20-5"/><path d="M20 49h30a9 9 0 0 0 0-18 13 13 0 0 0-25-2A10 10 0 0 0 20 49Z"/>
+  </symbol>
+  <symbol id="cloud" viewBox="0 0 64 64">
+    <path d="M17 49h33a10 10 0 0 0 0-20 14 14 0 0 0-27-3A11 11 0 0 0 17 49Z"/>
+  </symbol>
+  <symbol id="fog" viewBox="0 0 64 64">
+    <path d="M16 35h33a9 9 0 0 0 0-18 13 13 0 0 0-25-2 10 10 0 0 0-8 20Z"/><path d="M10 43h44M15 51h34M23 59h19"/>
+  </symbol>
+  <symbol id="rain" viewBox="0 0 64 64">
+    <path d="M17 37h33a9 9 0 0 0 0-18 13 13 0 0 0-25-2 10 10 0 0 0-8 20Z"/><path d="m22 44-4 8m17-8-4 8m17-8-4 8"/>
+  </symbol>
+  <symbol id="snow" viewBox="0 0 64 64">
+    <path d="M17 35h33a9 9 0 0 0 0-18 13 13 0 0 0-25-2 10 10 0 0 0-8 20Z"/><path d="M22 43v10m-4-8 8 6m0-6-8 6m19-8v10m-4-8 8 6m0-6-8 6m15-6v10m-4-8 8 6m0-6-8 6"/>
+  </symbol>
+  <symbol id="storm" viewBox="0 0 64 64">
+    <path d="M17 36h33a9 9 0 0 0 0-18 13 13 0 0 0-25-2 10 10 0 0 0-8 20Z"/><path d="m34 38-8 13h8l-4 10 14-17h-9l5-6"/>
+  </symbol>
+</svg>

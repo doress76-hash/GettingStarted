@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f2f5ee">
+  <title>{% if weather %}{{ weather.location }} weather{% else %}Weather, wherever{% endif %}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page-shell">
+    <header class="topbar">
+      <a class="wordmark" href="{{ url_for('index') }}" aria-label="Weather, wherever home">
+        <span class="wordmark-mark" aria-hidden="true">W</span>
+        <span>WEATHER, WHEREVER</span>
+      </a>
+      <span class="topbar-note">A little closer to the sky</span>
+    </header>
+
+    <section class="intro" aria-labelledby="page-title">
+      <p class="eyebrow">YOUR CITY, RIGHT NOW</p>
+      <h1 id="page-title">Weather, <span>wherever.</span></h1>
+      <form class="search-form" method="post" action="{{ url_for('index') }}">
+        <label class="sr-only" for="city">City or town</label>
+        <span class="search-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 4.5 4.5"></path></svg>
+        </span>
+        <input id="city" name="city" type="search" maxlength="100" placeholder="Search a city..." value="{{ city }}" autocomplete="off" required>
+        <label class="sr-only" for="unit">Temperature unit</label>
+        <select id="unit" name="unit" aria-label="Temperature unit">
+          <option value="celsius" {% if unit == 'celsius' %}selected{% endif %}>°C</option>
+          <option value="fahrenheit" {% if unit == 'fahrenheit' %}selected{% endif %}>°F</option>
+        </select>
+        <button class="search-button" type="submit"><span>Find weather</span><span aria-hidden="true">↗</span></button>
+      </form>
+      {% if message %}<p class="message" role="alert">{{ message }}</p>{% endif %}
+    </section>
+
+    {% if weather %}
+    <section class="results" aria-label="Weather for {{ weather.location }}">
+      <article class="current-weather">
+        <div class="current-copy">
+          <p class="eyebrow eyebrow-light">CURRENT CONDITIONS</p>
+          <h2>{{ weather.location }}</h2>
+          <p class="condition-label">{{ weather.current.condition }}</p>
+          <div class="current-details">
+            <span>Feels like {{ weather.current.feels_like|round|int }}{{ weather.unit_symbol }}</span>
+            <span>Humidity {{ weather.current.humidity }}%</span>
+            <span>Wind {{ weather.current.wind_speed|round|int }} {{ weather.wind_unit }}</span>
+          </div>
+        </div>
+        <div class="temperature-block">
+          <svg class="weather-icon current-icon" aria-hidden="true"><use href="{{ url_for('static', filename='weather-icons.svg') }}#{{ weather.current.icon }}"></use></svg>
+          <p class="temperature">{{ weather.current.temperature|round|int }}<span>{{ weather.unit_symbol }}</span></p>
+        </div>
+        <span class="current-orbit orbit-one" aria-hidden="true"></span>
+        <span class="current-orbit orbit-two" aria-hidden="true"></span>
+      </article>
+
+      <section class="forecast-section" aria-labelledby="forecast-title">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE DAYS AHEAD</p>
+            <h2 id="forecast-title">Five-day forecast</h2>
+          </div>
+          <span class="section-mark" aria-hidden="true">✳</span>
+        </div>
+        <div class="forecast-grid">
+          {% for day in weather.forecast %}
+          <article class="forecast-day">
+            <p class="forecast-weekday">{{ day.weekday }}</p>
+            <p class="forecast-date">{{ day.date }}</p>
+            <svg class="weather-icon forecast-icon" aria-hidden="true"><use href="{{ url_for('static', filename='weather-icons.svg') }}#{{ day.icon }}"></use></svg>
+            <p class="forecast-condition">{{ day.condition }}</p>
+            <p class="forecast-range"><strong>{{ day.high|round|int }}°</strong><span>{{ day.low|round|int }}°</span></p>
+          </article>
+          {% endfor %}
+        </div>
+      </section>
+    </section>
+    {% else %}
+    <section class="empty-state" aria-label="Weather preview">
+      <div class="empty-illustration" aria-hidden="true">
+        <svg class="weather-icon preview-sun"><use href="{{ url_for('static', filename='weather-icons.svg') }}#sun"></use></svg>
+        <svg class="weather-icon preview-cloud"><use href="{{ url_for('static', filename='weather-icons.svg') }}#partly-cloudy"></use></svg>
+      </div>
+      <p class="empty-caption">A new view of the day is just around the corner.</p>
+      <span class="empty-rule" aria-hidden="true"></span>
+      <span class="empty-coordinate" aria-hidden="true">40° 43′ N &nbsp; 73° 56′ W</span>
+    </section>
+    {% endif %}
+
+    <footer class="footer">
+      <span>Forecast data by Open-Meteo</span>
+      <span class="footer-dot" aria-hidden="true"></span>
+      <span>Made for looking up</span>
+    </footer>
+  </main>
+</body>
+</html>
